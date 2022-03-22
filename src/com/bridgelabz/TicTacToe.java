@@ -296,6 +296,24 @@ public class TicTacToe {
             showBoard();
             checkResult();
         }
+        else
+            subsequentChoice();
+    }
+
+    public static void subsequentChoice() {
+        //Middle position
+        if (board[5] == ' ')
+            board[5] = computer;
+            //All remaining sides
+        else if (board[2] == ' ')
+            board[2] = computer;
+        else if (board[4] == ' ')
+            board[4] = computer;
+        else if (board[6] == ' ')
+            board[6] = computer;
+        else if (board[8] == ' ')
+            board[8] = computer;
+        showBoard();
     }
 
 }
