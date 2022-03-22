@@ -23,9 +23,9 @@ public class TicTacToe {
                 System.out.println("Computer's turn");
                 winMove();
             }
-            if (isEnd == 1)
-                gameOver();
         }
+        gameOver();
+        anotherGame();
     }
 
     public static void choice() {
@@ -320,6 +320,34 @@ public class TicTacToe {
 
     public static void gameOver() {
         System.out.println("Game Over");
+    }
+
+    public static void anotherGame() {
+        System.out.println("Ready for another game \n1.Yes\n2.No");
+        Scanner sc = new Scanner(System.in);
+        if (sc.nextInt() == 1) {
+            for (int i = 1; i < board.length; i++) {
+                board[i] = ' ';
+            }
+            isEnd = 0;
+            choice();
+            toss();
+            while (isEnd != 1) {
+                if (turn == player1) {
+                    System.out.println("Player1's turn");
+                    userMove();
+                    showBoard();
+                    checkResult();
+                } else {
+                    System.out.println("Computer's turn");
+                    winMove();
+                }
+            }
+            gameOver();
+            anotherGame();
+        }
+        else
+            System.out.println("Thank you !");
     }
 
 }
