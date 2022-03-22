@@ -202,6 +202,75 @@ public class TicTacToe {
             showBoard();
             checkResult();
         }
+        else
+            blockMove(compMove);
+    }
+
+    public static void blockMove(int compMove){
+        //code for position 1
+        if ( ( (board[2] == board[3] && board[2] == player1) ||
+                (board[4] == board[7] && board[4] == player1) ||
+                (board[5] == board[9] && board[5] == player1) ) && board[1] == ' ') {
+            board[1] = computer;
+            compMove = 1;
+        }
+        //code for position 2
+        else if ( ( (board[1] == board[3] && board[1] == player1) ||
+                (board[5] == board[8] && board[5] == player1) ) && board[2] == ' ') {
+            board[2] = computer;
+            compMove = 1;
+        }
+        //code for position 3
+        else if ( ( (board[2] == board[3] && board[2] == player1) ||
+                (board[4] == board[7] && board[4] == player1) ||
+                (board[5] == board[9] && board[5] == player1) ) && board[3] == ' ') {
+            board[3] = computer;
+            compMove = 1;
+        }
+        //code for position 4
+        else if ( ( (board[1] == board[7] && board[1] == player1) ||
+                (board[5] == board[6] && board[5] == player1) ) && board[4] == ' ') {
+            board[4] = computer;
+            compMove = 1;
+        }
+        //code for position 5
+        else if ( ( (board[2] == board[8] && board[2] == player1) ||
+                (board[4] == board[6] && board[4] == player1) ||
+                (board[1] == board[9] && board[1] == player1) ||
+                (board[3] == board[7] && board[3] == player1)) && board[5] == ' ') {
+            board[5] = computer;
+            compMove = 1;
+        }
+        //code for position 6
+        else if ( ( (board[4] == board[5] && board[4] == player1) ||
+                (board[3] == board[9] && board[3] == player1) ) && board[6] == ' ') {
+            board[6] = computer;
+            compMove = 1;
+        }
+        //code for position 7
+        else if ( ( (board[1] == board[4] && board[1] == player1) ||
+                (board[8] == board[9] && board[8] == player1) ||
+                (board[3] == board[5] && board[3] == player1) ) && board[7] == ' ') {
+            board[7] = computer;
+            compMove = 1;
+        }
+        //code for position 8
+        else if ( ( (board[7] == board[9] && board[7] == player1) ||
+                (board[2] == board[5] && board[2] == player1) ) && board[8] == ' ') {
+            board[8] = computer;
+            compMove = 1;
+        }
+        //code for position 9
+        else if ( ( (board[7] == board[8] && board[7] == player1) ||
+                (board[1] == board[5] && board[1] == player1) ||
+                (board[3] == board[6] && board[3] == player1) ) && board[9] == ' ') {
+            board[9] = computer;
+            compMove = 1;
+        }
+        if (compMove == 1) {
+            showBoard();
+            checkResult();
+        }
     }
 
 }
