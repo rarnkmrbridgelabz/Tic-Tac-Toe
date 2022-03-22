@@ -271,6 +271,31 @@ public class TicTacToe {
             showBoard();
             checkResult();
         }
+        else
+            availableCorner(compMove);
+    }
+
+    public static void availableCorner(int compMove){
+        if (board[1] == ' ') {
+            board[1] = computer;
+            compMove = 1;
+        }
+        else if (board[3] == ' ') {
+            board[3] = computer;
+            compMove = 1;
+        }
+        else if (board[7] == ' ') {
+            board[7] = computer;
+            compMove = 1;
+        }
+        else if (board[9] == ' ') {
+            board[9] = computer;
+            compMove = 1;
+        }
+        if (compMove == 1) {
+            showBoard();
+            checkResult();
+        }
     }
 
 }
