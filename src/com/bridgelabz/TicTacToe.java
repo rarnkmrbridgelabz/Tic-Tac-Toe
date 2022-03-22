@@ -23,6 +23,8 @@ public class TicTacToe {
                 System.out.println("Computer's turn");
                 winMove();
             }
+            if (isEnd == 1)
+                gameOver();
         }
     }
 
@@ -55,7 +57,7 @@ public class TicTacToe {
         isSpaceFree(move);
     }
 
-    public static void isSpaceFree(int move){
+    public static void isSpaceFree(int move) {
         if (board[move] == ' ') {
             board[move] = player1;
         }
@@ -65,7 +67,7 @@ public class TicTacToe {
         }
     }
 
-    public static void toss(){
+    public static void toss() {
         int coin = (int) (Math.random()*2);
         if (coin == 1) {
             System.out.println("Toss decided Player1 will start first");
@@ -77,7 +79,7 @@ public class TicTacToe {
         }
     }
 
-    public static void checkResult(){
+    public static void checkResult() {
         //check if anyone won
         //horizontal winning positions
         for (int i = 1; i < board.length; i = i + 3) {
@@ -206,7 +208,7 @@ public class TicTacToe {
             blockMove(compMove);
     }
 
-    public static void blockMove(int compMove){
+    public static void blockMove(int compMove) {
         //code for position 1
         if ( ( (board[2] == board[3] && board[2] == player1) ||
                 (board[4] == board[7] && board[4] == player1) ||
@@ -275,7 +277,7 @@ public class TicTacToe {
             availableCorner(compMove);
     }
 
-    public static void availableCorner(int compMove){
+    public static void availableCorner(int compMove) {
         if (board[1] == ' ') {
             board[1] = computer;
             compMove = 1;
@@ -314,6 +316,10 @@ public class TicTacToe {
         else if (board[8] == ' ')
             board[8] = computer;
         showBoard();
+    }
+
+    public static void gameOver() {
+        System.out.println("Game Over");
     }
 
 }
