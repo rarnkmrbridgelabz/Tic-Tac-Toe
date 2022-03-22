@@ -13,9 +13,17 @@ public class TicTacToe {
         }
         choice();
         toss();
-        showBoard();
-        userMove();
-        checkResult();
+        while (isEnd != 1) {
+            if (turn == player1) {
+                System.out.println("Player1's turn");
+                userMove();
+                showBoard();
+                checkResult();
+            } else {
+                System.out.println("Computer's turn");
+                winMove();
+            }
+        }
     }
 
     public static void choice() {
@@ -41,7 +49,7 @@ public class TicTacToe {
     }
 
     public static void userMove() {
-        System.out.println("Select the index from 1 to 9 to make th move for "+turn);
+        System.out.println("Select the index from 1 to 9 to make the move ");
         Scanner sc = new Scanner(System.in);
         int move = sc.nextInt();
         isSpaceFree(move);
@@ -60,66 +68,139 @@ public class TicTacToe {
     public static void toss(){
         int coin = (int) (Math.random()*2);
         if (coin == 1) {
-            System.out.println("Player1 will start first");
+            System.out.println("Toss decided Player1 will start first");
             turn = player1;
         }
         else {
-            System.out.println("Computer will start first");
+            System.out.println("Toss decided Computer will start first");
             turn = computer;
         }
     }
 
     public static void checkResult(){
-        // first check if any cell is blank
-        for (int i = 1; i < board.length; i++) {
-            if (board[i] == ' '){
-                //System.out.println("Change the turn");
-                isEnd = 0;
-                //Changing the turn
-                if (turn == player1)
-                    turn = computer;
-                else
-                    turn = player1;
-                break;
-            }
-        }
-        //check who won or is tie
-        int isTie = 1;
-        if (isEnd == 1) {
-            //horizontal winning positions
-            for (int i = 1; i < board.length; i = i + 3) {
-                if (board[i] == board[i + 1] && board[i + 1] == board[i + 2]) {
-                    if (board[i] == player1)
-                        System.out.println("Player1 won");
-                    else
-                        System.out.println("Computer won");
-                    isTie = 0;
-                    break;
-                }
-            }
-            //vertical winning positions
-            for (int i = 1; i < 4; i++) {
-                if (board[i] == board[i + 3] && board[i + 3] == board[i + 6]) {
-                    if (board[i] == player1)
-                        System.out.println("Player1 won");
-                    else
-                        System.out.println("Computer won");
-                    isTie = 0;
-                    break;
-                }
-            }
-            //diagonal winning position
-            if (board[1] == board[5] && board[5] == board[9] ||
-                    board[3] == board[5] && board[5] == board[7]) {
-                if (board[1] == player1 || board[3] == player1)
+        //check if anyone won
+        //horizontal winning positions
+        for (int i = 1; i < board.length; i = i + 3) {
+            if ((board[i] == board[i + 1] && board[i + 1] == board[i + 2]) && board[i] != ' ') {
+                if (board[i] == player1)
                     System.out.println("Player1 won");
                 else
                     System.out.println("Computer won");
-                isTie = 0;
+                isEnd = 1;
+                break;
             }
-            if (isTie==1) {
-                System.out.println("Game Tie");
+        }
+        //vertical winning positions
+        if (isEnd != 0) {
+            for (int i = 1; i < 4; i++) {
+                if ((board[i] == board[i + 3] && board[i + 3] == board[i + 6]) && board[i] != ' ') {
+                    if (board[i] == player1)
+                        System.out.println("Player1 won");
+                    else
+                        System.out.println("Computer won");
+                    isEnd = 1;
+                    break;
+                }
             }
+        }
+        //diagonal winning position
+        if (isEnd != 1) {
+            if ((board[1] == board[5] && board[5] == board[9] ||
+                    board[3] == board[5] && board[5] == board[7]) && board[5] != ' ') {
+                if (board[5] == player1 )
+                    System.out.println("Player1 won");
+                else
+                    System.out.println("Computer won");
+                isEnd = 1;
+            }
+        }
+        // if no winner then check if any cell is blank
+        int isBlank = 0;
+        if (isEnd != 1) {
+            for (int i = 1; i < board.length; i++) {
+                if (board[i] == ' ') {
+                    System.out.println("Change the turn");
+                    //Changing the turn
+                    if (turn == player1)
+                        turn = computer;
+                    else
+                        turn = player1;
+                    isBlank = 1;
+                    break;
+                }
+            }
+        }
+        if (isBlank == 0 && isEnd != 1) {
+            System.out.println("Game Tie");
+            isEnd = 1;
+        }
+    }
+
+    public static void winMove () {
+        int compMove = 0;
+        //code for position 1
+        if ( ( (board[2] == board[3] && board[2] == computer) ||
+                (board[4] == board[7] && board[4] == computer) ||
+                (board[5] == board[9] && board[5] == computer) ) && board[1] == ' ') {
+            board[1] = computer;
+            compMove = 1;
+        }
+        //code for position 2
+        else if ( ( (board[1] == board[3] && board[1] == computer) ||
+                (board[5] == board[8] && board[5] == computer) ) && board[2] == ' ') {
+            board[2] = computer;
+            compMove = 1;
+        }
+        //code for position 3
+        else if ( ( (board[2] == board[3] && board[2] == computer) ||
+                (board[4] == board[7] && board[4] == computer) ||
+                (board[5] == board[9] && board[5] == computer) ) && board[3] == ' ') {
+            board[3] = computer;
+            compMove = 1;
+        }
+        //code for position 4
+        else if ( ( (board[1] == board[7] && board[1] == computer) ||
+                (board[5] == board[6] && board[5] == computer) ) && board[4] == ' ') {
+            board[4] = computer;
+            compMove = 1;
+        }
+        //code for position 5
+        else if ( ( (board[2] == board[8] && board[2] == computer) ||
+                (board[4] == board[6] && board[4] == computer) ||
+                (board[1] == board[9] && board[1] == computer) ||
+                (board[3] == board[7] && board[3] == computer)) && board[5] == ' ') {
+            board[5] = computer;
+            compMove = 1;
+        }
+        //code for position 6
+        else if ( ( (board[4] == board[5] && board[4] == computer) ||
+                (board[3] == board[9] && board[3] == computer) ) && board[6] == ' ') {
+            board[6] = computer;
+            compMove = 1;
+        }
+        //code for position 7
+        else if ( ( (board[1] == board[4] && board[1] == computer) ||
+                (board[8] == board[9] && board[8] == computer) ||
+                (board[3] == board[5] && board[3] == computer) ) && board[7] == ' ') {
+            board[7] = computer;
+            compMove = 1;
+        }
+        //code for position 8
+        else if ( ( (board[7] == board[9] && board[7] == computer) ||
+                (board[2] == board[5] && board[2] == computer) ) && board[8] == ' ') {
+            board[8] = computer;
+            compMove = 1;
+        }
+        //code for position 9
+        else if ( ( (board[7] == board[8] && board[7] == computer) ||
+                (board[1] == board[5] && board[1] == computer) ||
+                (board[3] == board[6] && board[3] == computer) ) && board[9] == ' ') {
+            board[9] = computer;
+            compMove = 1;
+        }
+        if (compMove == 1) {
+            showBoard();
+            checkResult();
         }
     }
 
