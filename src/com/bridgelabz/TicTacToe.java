@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class TicTacToe {
     static char[] board = new char[10];
+    static char player1,computer;
 
     public static void main(String[] args) {
         System.out.println("Welcome to TicTacToe Workshop");
@@ -25,7 +26,8 @@ public class TicTacToe {
         System.out.println("Player1 Chosen Letter is: " + player1);
         System.out.println("Computer Chosen Letter is: " + computer);
         showBoard(board);
-        userMove(player1);
+        int move = userMove();
+        checkFreeSpace(move);
     }
 
     public static char choise() {
@@ -41,14 +43,23 @@ public class TicTacToe {
         }
     }
 
-    public static void userMove(char player1){
+    public static int userMove() {
         System.out.println("Make a move by selecting any board index position from 1 to 9:");
         Scanner sc = new Scanner(System.in);
         int move = sc.nextInt();
+        return move;
+    }
+    public static void checkFreeSpace(int move){
         if(board[move]== ' '){
             board[move]= player1;
         }
+        else{
+            System.out.println("Space already Occupied,Select anyother board index position from 1 to 9:");
+            move=userMove();
+            checkFreeSpace(move);
+        }
     }
+
 }
 
 
